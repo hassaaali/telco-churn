@@ -1,0 +1,102 @@
+{% block content %}
+<html>
+<head> 
+    <title>Telco Churn Predictor</title>   
+    <h1>
+        Telco Churn Predictor
+    </h1>
+    <div class="overlay" id="loading_screen" hidden style="alignment: top">
+        <i class="fa fa-refresh fa-spin"></i>
+    </div>
+    <section class="content">
+        <div class="form-group">
+            <label for="dependents"> Dependents </label>
+            <select class="form-control select2" id="dependents" name="dependents" required>
+                <option disabled selected value> -- Dependents --</option>
+                <option value="Yes"> Yes</option>
+                <option value="No"> No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="online_security"> Online Security </label>
+            <select class="form-control select2" id="online_security" name="online_security" required>
+                <option disabled selected value> -- Online Security --</option>
+                <option value="Yes"> Yes</option>
+                <option value="No"> No</option>
+                <option value="No internet service"> No internet service</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="online_backup"> Online Backup </label>
+            <select class="form-control select2" id="online_backup" name="online_backup" required>
+                <option disabled selected value> -- Online Backup --</option>
+                <option value="Yes"> Yes</option>
+                <option value="No"> No</option>
+                <option value="No internet service"> No internet service</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="internet_service"> Internet Service </label>
+            <select class="form-control select2" id="internet_service" name="internet_service" required>
+                <option disabled selected value> -- Internet Service --</option>
+                <option value="DSL"> DSL</option>
+                <option value="Fiber optic"> Fiber optic</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tech_support"> Tech Support </label>
+            <select class="form-control select2" id="tech_support" name="tech_support" required>
+                <option disabled selected value> -- Tech Support --</option>
+                <option value="Yes"> Yes</option>
+                <option value="No"> No</option>
+                <option value="No internet service"> No internet service</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="contract"> Contract </label>
+            <select class="form-control select2" id="contract" name="contract" required>
+                <option disabled selected value> -- Contract --</option>
+                <option value="Month-to-month"> Month-to-month</option>
+                <option value="One year"> One year</option>
+                <option value="Two year"> Two year</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="paperless_billing"> Paperless Billing </label>
+            <select class="form-control select2" id="paperless_billing" name="paperless_billing" required>
+                <option disabled selected value> -- Paperless Billing --</option>
+                <option value="Yes"> Yes</option>
+                <option value="No"> No</option>
+            </select>
+        </div>
+        <div class="box-body">
+            <div class="form-group col-lg-12">
+                <div class="col-lg-4">
+                    <label for="tenure"> Tenure </label>
+                    <input type="text" class="form-control"
+                           id="tenure"
+                           name="tenure"
+                           placeholder="How long the customer has subscribed to the company's services in months">
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <div class="col-lg-4">
+                    <label for="monthly_charges"> Monthly Charges </label>
+                    <input type="text" class="form-control"
+                           id="monthly_charges"
+                           name="monthly_charges"
+                           placeholder="Number of bills charged each month">
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div style="text-align: center;">
+                <button type="submit" style="width: fit-content"
+                        class="btn btn-success Submit">
+                    Submit
+                </button>
+            </div>
+    </section>
+</head>
+</html>
+{% endblock %}
