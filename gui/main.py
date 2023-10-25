@@ -4,7 +4,7 @@ from flask_session import Session  # https://pythonhosted.org/Flask-Session
 app = Flask(__name__)
 Session(app)
 
-@app.route('/telco_churn', methods=['GET', 'PUT'])
+@app.route('/telco-churn', methods=['GET', 'PUT'])
 
 def telco_churn():
     try:
