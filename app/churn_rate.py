@@ -31,6 +31,8 @@ class ChurnRatePredictor:
         self.y_train = None
         self.X_test = None
         self.y_test = None
+        self.y_pred_rf = None
+        self.y_pred_nn = None
         self.random_forest_model = None
         self.neural_network_model = None
         self.confusion_matrix = None
@@ -49,11 +51,11 @@ class ChurnRatePredictor:
             self.label_encoders[f] = le
             self.dataset[f] = le.transform(self.dataset[f])
             feat_encoder_file_path = os.path.join(self.encoder_path, "{n}_encoder.pkl".format(n=f))
-            if f != self.target:
-                with open(feat_encoder_file_path, "wb") as f:
-                    joblib.dump(le, f)
-                    self.log.info("Encoder Saved: ",
-                                  Path=feat_encoder_file_path)
+            #if f != self.target:
+            with open(feat_encoder_file_path, "wb") as f:
+                joblib.dump(le, f)
+                self.log.info("Encoder Saved: ",
+                              Path=feat_encoder_file_path)
         self.X = self.dataset.drop(self.target, axis=1)
         self.y = self.dataset[self.target]
 
@@ -114,10 +116,10 @@ class ChurnRatePredictor:
         self.random_forest_model.fit(self.X_train, self.y_train)
 
     def evaluate_random_forest(self):
-        y_pred = self.random_forest_model.predict(self.X_test)
-        accuracy = accuracy_score(self.y_test, y_pred)
-        self.confusion = confusion_matrix(self.y_test, y_pred)
-        self.classification_report = classification_report(self.y_test, y_pred)
+        self.y_pred_rf = self.random_forest_model.predict(self.X_test)
+        accuracy = accuracy_score(self.y_test, self.y_pred_rf )
+        self.confusion = confusion_matrix(self.y_test, self.y_pred_rf )
+        self.classification_report = classification_report(self.y_test, self.y_pred_rf)
         self.log.info('Predicted on original Test Dataset: ', Accuracy=accuracy)
 
     def save_random_forest(self):
@@ -131,13 +133,15 @@ class ChurnRatePredictor:
                               new_data):
         all_files = os.listdir(self.encoder_path)
         features_labelized = [f.split("_encoder")[0] for f in all_files]
-        new_data = pd.DataFrame(new_data).T
+        if isinstance(new_data, pd.Series):
+            new_data = pd.DataFrame(new_data).T
         for i in range(len(all_files)):
-            with open(os.path.join(self.encoder_path, all_files[i]), "rb") as f:
-                le = joblib.load(f)
-                self.log.info("Encoder Loaded: ",
-                              Feature=features_labelized[i])
-                new_data[features_labelized[i]] = le.transform(new_data[features_labelized[i]])
+            if features_labelized[i] != self.target:
+                with open(os.path.join(self.encoder_path, all_files[i]), "rb") as f:
+                    le = joblib.load(f)
+                    self.log.info("Encoder Loaded: ",
+                                  Feature=features_labelized[i])
+                    new_data[features_labelized[i]] = le.transform(new_data[features_labelized[i]])
         churn = self.random_forest_model.predict(new_data)
         churn = ["No" if c == 0 else "Yes" for c in churn]
         self.log.info("Prediction done on new dataset.")
@@ -166,6 +170,7 @@ class ChurnRatePredictor:
                                       validation_data=(self.X_test, self.y_test))
 
     def evaluate_neural_network(self):
+        self.y_pred_nn = self.neural_network_model.predict(self.X_test)
         loss, accuracy = self.neural_network_model.evaluate(self.X_test, self.y_test)
         self.log.info("Neural Network Accuracy: ", Accuracy=accuracy)
 
@@ -180,16 +185,18 @@ class ChurnRatePredictor:
                               new_data):
         all_files = os.listdir(self.encoder_path)
         features_labelized = [f.split("_encoder")[0] for f in all_files]
-        new_data = pd.DataFrame(new_data).T
+        if isinstance(new_data, pd.Series):
+            new_data = pd.DataFrame(new_data).T
         for i in range(len(all_files)):
-            with open(os.path.join(self.encoder_path, all_files[i]), "rb") as f:
-                le = joblib.load(f)
-                self.log.info("Encoder Loaded: ",
-                              Feature= features_labelized[i])
-                new_data[features_labelized[i]] = le.transform(new_data[features_labelized[i]])
+            if features_labelized[i] != self.target:
+                with open(os.path.join(self.encoder_path, all_files[i]), "rb") as f:
+                    le = joblib.load(f)
+                    self.log.info("Encoder Loaded: ",
+                                  Feature=features_labelized[i])
+                    new_data[features_labelized[i]] = le.transform(new_data[features_labelized[i]])
         new_data = new_data.to_numpy().astype('float32')
         churn = self.neural_network_model.predict(new_data)
-        churn = ["No" if c == 0 else "Yes" for c in churn]
+        churn = ["Yes" if c > 0.5 else "No" for c in churn]
         self.log.info("Prediction done on new dataset.")
         return churn
 
@@ -200,6 +207,7 @@ if __name__ == "__main__":
                                         "data_telco_customer_churn.csv"),
                            low_memory=False)
     random_sample = data_set.iloc[0].iloc[:-1]
+    random_sample = data_set.iloc[:10, :-1]
     c = ChurnRatePredictor(data_set=data_set,
                            features=feats,
                            target=target)
@@ -213,8 +221,8 @@ if __name__ == "__main__":
     c.evaluate_random_forest()
     c.save_random_forest()
     c.load_random_forest()
-    print(c.predict_random_forest(new_data=random_sample))
-    c.train_neural_network(epochs=5, batch_size=1000)
+    c.predict_random_forest(new_data=random_sample)
+    c.train_neural_network(epochs=100, batch_size=1000)
     c.evaluate_neural_network()
     c.save_neural_network()
     c.load_neural_network_model()
