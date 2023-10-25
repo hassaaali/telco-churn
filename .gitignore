@@ -509,3 +509,4 @@ About
 venv/
 ml_env/
 .idea
+.dockerignore
