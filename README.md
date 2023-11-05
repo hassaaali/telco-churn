@@ -19,10 +19,13 @@ This guide provides instructions for installing Docker on various platforms.
 To ensure a clean and isolated environment for your project, you can create a container using `docker`. Here are the steps to create a docker container:
 
 1. Open your terminal and clone the repository.
-2. Install `docker` if you haven't already:
+2. Install `docker` if you haven't already.
 3. Create a docker image of the machine learning environment named `ml_env`:
+
    ```docker build -t ml_env:v4 .```
+   
 4. Create and run a docker conatiner using the image created (The conatiner uses port 5000 for communicatio with GUI):
+
    ```docker run --rm -it -p 5000:5000/tcp ml_env```
 
 ## Running the frontend dashboard:
