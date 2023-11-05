@@ -76,4 +76,3 @@ def get_result(payload: ApplicationData):
 @app.get("/")
 async def root():
     return {"Uvicorn": "I'm alive"}
-
