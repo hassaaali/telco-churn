@@ -34,8 +34,8 @@ To ensure a clean and isolated environment for your project, you can create a co
 2. Install the requirements included in `requirements.txt`
 3. Run the app:
 
- ```python3 main.py```
- 
+   ```python3 main.py```
+
 4. You can now access the app through http://localhost:8000/telco-churn/ and get the churn result for user defined inputs.
 
 Note: The GUI dashboard can also run in a docker container instead (optional)
