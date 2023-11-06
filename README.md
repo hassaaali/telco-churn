@@ -1,6 +1,6 @@
 # Churn Rate 1.0
 
-Welcome to my machine learning project! Below, you'll find information about the how to run the program in Docker. The average accuracy of the machine learning application is 78%. The training data has been sourced from Kaggle.
+Welcome to my machine learning project! Below, you'll find information about the how to run the program in Docker. The average accuracy of the machine learning application is 78%. The training data has been sourced from Kaggle (https://www.kaggle.com/datasets/reyhanarighy/data-telco-customer-churn).
 
 ## Software Packages
 
