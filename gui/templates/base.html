@@ -5,11 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Telco Churn Predictor</title>   
         <h1>
-            Telco Churn Predictor
+            <center>Telco Churn Predictor</center>
         </h1>
         <script src="../static/jquery.min.js"></script>
         <script src="../static/bootstrap.min.js"></script>
         <link rel="stylesheet" href="../static/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/style.css">
     </head>
     <body>
         <div class="overlay" id="loading_screen" hidden style="alignment: top">
@@ -17,7 +18,7 @@
         </div>
         <section class="content">
             <div class="box-body input_variables">
-                <div class="form-group">
+                <div class="form-group col-lg-12">
                     <label for="dependents"> Dependents </label>
                     <select class="form-control select2" id="dependents" name="dependents" required>
                         <option disabled selected value> -- Dependents --</option>
@@ -25,7 +26,7 @@
                         <option value="No"> No</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-lg-12">
                     <label for="online_security"> Online Security </label>
                     <select class="form-control select2" id="online_security" name="online_security" required>
                         <option disabled selected value> -- Online Security --</option>
@@ -34,7 +35,7 @@
                         <option value="No internet service"> No internet service</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-lg-12">
                     <label for="online_backup"> Online Backup </label>
                     <select class="form-control select2" id="online_backup" name="online_backup" required>
                         <option disabled selected value> -- Online Backup --</option>
@@ -43,7 +44,7 @@
                         <option value="No internet service"> No internet service</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-lg-12">
                     <label for="device_protection"> Device Protection </label>
                     <select class="form-control select2" id="device_protection" name="device_protection" required>
                         <option disabled selected value> -- Device Protection --</option>
@@ -52,7 +53,7 @@
                         <option value="No internet service"> No internet service</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-lg-12">
                     <label for="internet_service"> Internet Service </label>
                     <select class="form-control select2" id="internet_service" name="internet_service" required>
                         <option disabled selected value> -- Internet Service --</option>
@@ -60,7 +61,7 @@
                         <option value="Fiber optic"> Fiber optic</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-lg-12">
                     <label for="tech_support"> Tech Support </label>
                     <select class="form-control select2" id="tech_support" name="tech_support" required>
                         <option disabled selected value> -- Tech Support --</option>
@@ -69,7 +70,7 @@
                         <option value="No internet service"> No internet service</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-lg-12">
                     <label for="contract"> Contract </label>
                     <select class="form-control select2" id="contract" name="contract" required>
                         <option disabled selected value> -- Contract --</option>
@@ -78,7 +79,7 @@
                         <option value="Two year"> Two year</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-lg-12">
                     <label for="paperless_billing"> Paperless Billing </label>
                     <select class="form-control select2" id="paperless_billing" name="paperless_billing" required>
                         <option disabled selected value> -- Paperless Billing --</option>
@@ -107,7 +108,8 @@
                     </div>
                 </div>
             </div>
-            <div><button type="submit" class="btn btn-success" style="margin-top: 2em;" onclick="submit()"> Submit
+            <div>
+                <button type="submit" class="btn btn-success" style="margin-top: 2em;text-align: center;" onclick="submit()"> Submit
             </button>
             </div>
         </section>
