@@ -2,7 +2,7 @@
 
 Welcome to my machine learning project! Below, you'll find information about the how to run the program in Docker. 
 
-The machine learning application predicts the churn of a customer i.e. predicts how likely it is that a customer will unscubscribe from a company's telecommunication services. The average accuracy of the machine learning application is 78% using the Random Forest ML model. The training data has been sourced from Kaggle (https://www.kaggle.com/datasets/reyhanarighy/data-telco-customer-churn).
+The machine learning application predicts the churn of a customer i.e. predicts how likely it is that a customer will unsubscribe from a company's telecommunication services. The average accuracy of the machine learning application is 78% using the Random Forest ML model. The training data has been sourced from Kaggle (https://www.kaggle.com/datasets/reyhanarighy/data-telco-customer-churn).
 
 ## Software Packages
 
